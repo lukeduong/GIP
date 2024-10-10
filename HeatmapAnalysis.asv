@@ -1,0 +1,102 @@
+clear all
+close all
+workspace;  % Make sure the workspace panel is showing.
+format long g;
+format compact;
+fontSize = 16;
+
+% Get the name of the image the user wants to use.
+FileName = 'PhosphorousTrialPic.jpg';
+folder = pwd;
+fullFileName = fullfile(folder, FileName);
+
+% Read in demo image.
+rgbImage = imread(fullFileName);
+% Get the dimensions of the image.
+[rows, columns, numberOfColorChannels] = size(rgbImage);
+
+% Display image.
+subplot(2, 2, 1);
+imshow(rgbImage, []);
+impixelinfo;
+axis on;
+caption = sprintf('Original Color Image\n%s', FileName);
+title(caption, 'FontSize', fontSize, 'Interpreter', 'None');
+hp = impixelinfo(); % Set up status line to see values when you mouse over the image.
+
+% Set up figure properties:
+% Enlarge figure to full screen.
+set(gcf, 'Units', 'Normalized', 'OuterPosition', [0 0.05 1 0.95]);
+% Get rid of tool bar and pulldown menus that are along top of figure.
+% set(gcf, 'Toolbar', 'none', 'Menu', 'none');
+% Give a name to the title bar.
+set(gcf, 'Name', 'Demo by ImageAnalyst', 'NumberTitle', 'Off')
+drawnow;
+
+% Crop off the white surround
+rgbImage = rgbImage(29 : 328, 88 : 387, :);
+% Display image.
+subplot(2, 2, 2);
+imshow(rgbImage, []);
+impixelinfo;
+axis on;
+caption = sprintf('Cropped Color Image\n%s', FileName);
+title(caption, 'FontSize', fontSize, 'Interpreter', 'None');
+hp = impixelinfo(); % Set up status line to see values when you mouse over the image.
+
+% Get an indexed image.
+numberOfColorClasses = 3;
+[indexedImage, customColorMap] = rgb2ind(rgbImage, numberOfColorClasses);
+
+% Display the image.
+subplot(2, 2, 3);
+imshow(indexedImage, []);
+colormap(customColorMap);
+colorbar;
+caption = sprintf('Color Segmentation Mask Image');
+title(caption, 'FontSize', fontSize, 'Interpreter', 'None');
+impixelinfo;
+axis('on', 'image');
+drawnow;
+
+% Take the histogram
+subplot(2, 2, 4);
+hObject = histogram(indexedImage, 'normalization', 'probability');
+grid on;
+caption = sprintf('Area Fractions Of Each Color Class');
+xlabel('Class Number', 'FontSize', fontSize);
+ylabel('Area Fraction', 'FontSize', fontSize);
+title(caption, 'FontSize', fontSize, 'Interpreter', 'None');
+xticks(0 : numberOfColorClasses - 1);
+
+% Tell user the answer.
+message = sprintf('Done!');
+uiwait(helpdlg(message));
+
+%%
+clear all
+close all
+workspace;  % Make sure the workspace panel is showing.
+format long g;
+format compact;
+fontSize = 16;
+
+% Get the name of the image the user wants to use.
+FileName = 'PhosphorousTrialPic.jpg';
+folder = pwd;
+fullFileName = fullfile(folder, FileName);
+
+% Read in demo image.
+rgbImage = imread(fullFileName);
+% Get the dimensions of the image.
+[rows, columns, numberOfColorChannels] = size(rgbImage);
+
+figure
+imshow(rgbImage, []);
+impixelinfo;
+axis on;
+caption = sprintf('Original Color Image\n%s', FileName);
+title(caption, 'FontSize', fontSize, 'Interpreter', 'None');
+hp = impixelinfo(); % Set up status line to see values when you mouse over the image.
+
+
