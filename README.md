@@ -1,1 +1,4 @@
 # GIP
+This directory holds several scripts that were developed for the software side of teh digital twin protoype for my Group Industrial Project at University. This project involved designing a prototype digital twin to aid the automation of crop farming. The software side involved wireless connection between the back-end and the prototype, producing the back-end functions to control and send instructions, creating simple neural networks to predict ideal crops to grow from the grwoing conditions sensed from the prototype and connection to both Arduino Cloud and a simple front-end. There is also an example of the activation scripts written in Arduino to activate the nutrient distribution system.
+
+The final main script is named DigitalTwinLayout which holds the functions and the connection to Arduino Cloud for the protoype to read. 
